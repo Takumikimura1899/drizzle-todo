@@ -9,6 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { CreateTodo } from './create-todo';
 
 export default async function Home() {
   const todos = await getTodos();
@@ -18,11 +19,14 @@ export default async function Home() {
       <Table>
         <TableCaption>Todo List</TableCaption>
         <TableHeader>
-          <TableRow>
+          <TableRow className='hover:bg-transparent'>
             <TableHead>タイトル</TableHead>
             <TableHead>ステータス</TableHead>
             <TableHead>作成日</TableHead>
             <TableHead>更新日</TableHead>
+            <TableHead>
+              <CreateTodo />
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
