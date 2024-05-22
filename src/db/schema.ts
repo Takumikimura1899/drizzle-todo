@@ -1,5 +1,5 @@
 import { pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
-import { createInsertSchema } from 'drizzle-zod';
+import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 export const statusEnum = pgEnum('status', [
   'notStarted',

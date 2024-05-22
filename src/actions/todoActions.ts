@@ -1,7 +1,7 @@
 'use server';
 import { db } from '@/db/drizzle';
 import { insertTodoSchema, todo } from '@/db/schema';
-import { asc } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 import { cache } from 'react';
 
@@ -16,6 +16,15 @@ export const createTodo = cache(async (formData: FormData) => {
   });
   try {
     await db.insert(todo).values(newTodo);
+    revalidatePath('/');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const deleteTodo = cache(async (id: number) => {
+  try {
+    await db.delete(todo).where(eq(todo.id, id));
     revalidatePath('/');
   } catch (error) {
     console.error(error);

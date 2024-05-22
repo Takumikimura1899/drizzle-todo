@@ -10,6 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { CreateTodo } from './create-todo';
+import { DeleteTodo } from './delete-todo';
 
 export default async function Home() {
   const todos = await getTodos();
@@ -36,9 +37,9 @@ export default async function Home() {
               <TableCell>{todo.status}</TableCell>
               <TableCell>{todo.createdAt.toDateString()}</TableCell>
               <TableCell>{todo.updatedAt.toDateString()}</TableCell>
-              <TableCell className='w-1/6 space-x-2'>
+              <TableCell className='flex space-x-2'>
                 <Button variant='outline'>編集</Button>
-                <Button variant='destructive'>削除</Button>
+                <DeleteTodo id={todo.id} />
               </TableCell>
             </TableRow>
           ))}
