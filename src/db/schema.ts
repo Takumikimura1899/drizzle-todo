@@ -12,7 +12,9 @@ export const todo = pgTable('todo', {
   title: text('title').notNull(),
   status: statusEnum('status').default('notStarted').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at')
+    .notNull()
+    .$onUpdate(() => new Date()),
 });
 
 export const insertTodoSchema = createInsertSchema(todo);

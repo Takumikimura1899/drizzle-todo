@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { format } from '@formkit/tempo';
 
 export const TodoItem = ({
   id,
@@ -90,10 +91,10 @@ export const TodoItem = ({
         )}
       </TableCell>
       <TableCell className='min-w-32 max-w-32'>
-        {createdAt.toDateString()}
+        {format(createdAt, 'YY/MM/DD HH:mm:ss')}
       </TableCell>
       <TableCell className='min-w-32 max-w-32'>
-        {updatedAt.toDateString()}
+        {format(updatedAt, 'YY/MM/DD HH:mm:ss')}
       </TableCell>
       <TableCell className='flex space-x-2 min-w-32 max-w-32'>
         {isEditing ? (
