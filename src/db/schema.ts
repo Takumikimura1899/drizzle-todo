@@ -10,9 +10,13 @@ export const statusEnum = pgEnum('status', [
 export const todo = pgTable('todo', {
   id: serial('id').primaryKey().notNull(),
   title: text('title').notNull(),
-  status: statusEnum('status').notNull().default('notStarted'),
+  status: statusEnum('status').default('notStarted').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
 export const insertTodoSchema = createInsertSchema(todo);
+export const updateTodoSchema = createInsertSchema(todo).pick({
+  title: true,
+  status: true,
+});

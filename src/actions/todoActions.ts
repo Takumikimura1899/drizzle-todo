@@ -22,6 +22,24 @@ export const createTodo = cache(async (formData: FormData) => {
   }
 });
 
+export const updateTodo = cache(
+  async (id: number, updateTodo: typeof todo.$inferInsert) => {
+    const title = updateTodo.title;
+    const status = updateTodo.status;
+    if (!title || !status) return;
+    const newTodo = insertTodoSchema.parse({
+      title: title,
+      status: status,
+    });
+    try {
+      await db.update(todo).set(newTodo).where(eq(todo.id, id));
+      revalidatePath('/');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);
+
 export const deleteTodo = cache(async (id: number) => {
   try {
     await db.delete(todo).where(eq(todo.id, id));
