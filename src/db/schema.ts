@@ -1,5 +1,5 @@
 import { pgEnum, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
-import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
+import { createInsertSchema } from 'drizzle-zod';
 
 export const statusEnum = pgEnum('status', [
   'notStarted',
@@ -13,6 +13,7 @@ export const todo = pgTable('todo', {
   status: statusEnum('status').default('notStarted').notNull(),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at')
+    .defaultNow()
     .notNull()
     .$onUpdate(() => new Date()),
 });
